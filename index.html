@@ -4,166 +4,76 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Business Lab - AIで未来を再定義する</title>
+    <link rel="icon" href="favicon.png" type="image/png">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        
         body {
             font-family: 'Helvetica Neue', Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
-            line-height: 1.8;
-            color: #e2e8f0;
-            background-color: #030712;
-            overflow-x: hidden;
+            line-height: 1.8; color: #e2e8f0; background-color: #030712; overflow-x: hidden;
         }
-
-        /* AIサイバー背景 */
         .cyber-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
             background: radial-gradient(circle at 50% 50%, #1e293b 0%, #030712 100%);
         }
         .cyber-bg::before {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                radial-gradient(circle at 20% 30%, rgba(59, 130, 246, 0.15) 0%, transparent 50%),
-                radial-gradient(circle at 80% 70%, rgba(147, 197, 253, 0.1) 0%, transparent 50%);
+            content: ''; position: absolute; width: 100%; height: 100%;
+            background-image: radial-gradient(circle at 20% 30%, rgba(59, 130, 246, 0.15) 0%, transparent 50%);
             animation: pulse 10s infinite alternate;
         }
-
-        @keyframes pulse {
-            0% { opacity: 0.5; }
-            100% { opacity: 1; }
-        }
-
+        @keyframes pulse { 0% { opacity: 0.5; } 100% { opacity: 1; } }
         header {
-            background: rgba(3, 7, 18, 0.8);
-            backdrop-filter: blur(15px);
-            padding: 20px 0;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(3, 7, 18, 0.8); backdrop-filter: blur(15px); padding: 20px 0;
+            position: fixed; width: 100%; top: 0; z-index: 1000; border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
         nav { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 40px; }
         .logo { font-size: 24px; font-weight: 800; color: #3b82f6; letter-spacing: 2px; }
         .nav-links { display: flex; gap: 30px; list-style: none; }
         .nav-links a { color: #94a3b8; text-decoration: none; font-size: 14px; transition: 0.3s; }
         .nav-links a:hover { color: #3b82f6; }
-
-        .hero {
-            padding: 220px 40px 150px;
-            text-align: center;
-        }
-        .hero h1 {
-            font-size: clamp(32px, 8vw, 64px);
-            font-weight: 800;
-            margin-bottom: 30px;
-            line-height: 1.2;
-            color: #fff;
-            text-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
-        }
-        .hero h1 span {
-            background: linear-gradient(to right, #60a5fa, #a855f7);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
+        .hero { padding: 220px 40px 150px; text-align: center; }
+        .hero h1 { font-size: clamp(32px, 8vw, 64px); font-weight: 800; margin-bottom: 30px; color: #fff; }
+        .hero h1 span { background: linear-gradient(to right, #60a5fa, #a855f7); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .hero p { font-size: 20px; color: #94a3b8; max-width: 800px; margin: 0 auto; }
-
         section { padding: 100px 20px; max-width: 1100px; margin: 0 auto; }
         .section-title { text-align: center; font-size: 36px; margin-bottom: 60px; color: #fff; }
-
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-        .card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 40px;
-            border-radius: 20px;
-            transition: 0.3s;
-        }
-        .card:hover { background: rgba(255, 255, 255, 0.07); transform: translateY(-5px); border-color: #3b82f6; }
-        .card h3 { color: #3b82f6; margin-bottom: 15px; font-size: 22px; }
-
-        .contact-box {
-            background: linear-gradient(135deg, rgba(30, 58, 138, 0.3), rgba(17, 24, 39, 0.3));
-            padding: 60px;
-            border-radius: 30px;
-            text-align: center;
-            border: 1px solid rgba(59, 130, 246, 0.3);
-        }
+        .card { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1); padding: 40px; border-radius: 20px; transition: 0.3s; }
+        .card:hover { border-color: #3b82f6; background: rgba(255, 255, 255, 0.07); }
+        .card h3 { color: #3b82f6; margin-bottom: 15px; }
+        .contact-box { background: linear-gradient(135deg, rgba(30, 58, 138, 0.3), rgba(17, 24, 39, 0.3)); padding: 60px; border-radius: 30px; text-align: center; border: 1px solid rgba(59, 130, 246, 0.3); }
         .line-btn { display: inline-block; transition: 0.3s; margin-top: 30px; }
-        .line-btn:hover { transform: scale(1.05); filter: drop-shadow(0 0 15px #06c755); }
-
-        .tokusho-box {
-            background: rgba(255, 255, 255, 0.02);
-            padding: 40px;
-            border-radius: 20px;
-            font-size: 14px;
-        }
+        .line-btn:hover { transform: scale(1.05); }
+        .tokusho-box { background: rgba(255, 255, 255, 0.02); padding: 40px; border-radius: 20px; font-size: 14px; }
         .tokusho-table { width: 100%; border-collapse: collapse; }
-        .tokusho-table th, .tokusho-table td {
-            text-align: left;
-            padding: 15px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        .tokusho-table th { width: 30%; color: #3b82f6; font-weight: 600; }
-
+        .tokusho-table th, .tokusho-table td { text-align: left; padding: 15px; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
+        .tokusho-table th { color: #3b82f6; width: 30%; }
         footer { text-align: center; padding: 50px; color: #4b5563; font-size: 12px; }
     </style>
 </head>
 <body>
     <div class="cyber-bg"></div>
-
     <header>
-        <nav>
-            <div class="logo">AI BUSINESS LAB</div>
-            <ul class="nav-links">
-                <li><a href="#features">特徴</a></li>
-                <li><a href="#contact">相談</a></li>
-                <li><a href="#tokusho">特商法</a></li>
-            </ul>
-        </nav>
+        <nav><div class="logo">AI BUSINESS LAB</div><ul class="nav-links"><li><a href="#features">特徴</a></li><li><a href="#contact">相談</a></li><li><a href="#tokusho">特商法</a></li></ul></nav>
     </header>
-
     <section class="hero">
         <h1><span>AIで未来を再定義する</span></h1>
-        <p>最先端テクノロジーを武器に、個人の可能性を最大化。AI Business Labは、次世代を生き抜くための核心的なAI活用スキルを提供します。</p>
+        <p>最先端テクノロジーを武器に、個人の可能性を最大化。次世代を生き抜くための核心的なAI活用スキルを提供します。</p>
     </section>
-
     <section id="features">
         <h2 class="section-title">LABの特徴</h2>
         <div class="grid">
-            <div class="card">
-                <h3>01. 実践的AI活用</h3>
-                <p>ChatGPTや画像生成AIを単なるツールではなく、ビジネス価値を生む武器として使いこなす方法を学びます。</p>
-            </div>
-            <div class="card">
-                <h3>02. 個別最適化</h3>
-                <p>あなたの現在のスキルと目標に合わせ、最適なスキルアップのロードマップをプロが共に描きます。</p>
-            </div>
-            <div class="card">
-                <h3>03. 継続サポート</h3>
-                <p>一度きりの情報提供ではなく、常に進化するAIトレンドを捉え続けるためのサポート体制を提供します。</p>
-            </div>
+            <div class="card"><h3>01. 実践的AI活用</h3><p>ChatGPTや画像生成AIを単なるツールではなく、ビジネス価値を生む武器として使いこなす方法を学びます。</p></div>
+            <div class="card"><h3>02. 個別最適化</h3><p>あなたの目標に合わせ、最適なスキルアップのロードマップをプロが共に描きます。</p></div>
+            <div class="card"><h3>03. 継続サポート</h3><p>常に変化するAIトレンドを捉え続けるためのサポート体制を提供します。</p></div>
         </div>
     </section>
-
     <section id="contact">
         <div class="contact-box">
-            <h2 style="font-size: 28px; margin-bottom: 20px;">LINEで無料個別相談</h2>
+            <h2>LINEで無料個別相談</h2>
             <p>現在の悩みや目標をお聞かせください。AIプロデューサーが直接回答します。</p>
-            <a href="https://lin.ee/cIf83XO" class="line-btn">
-                <img src="https://scdn.line-apps.com/n/line_add_friends/btn/ja.png" alt="LINE友だち追加" height="50">
-            </a>
+            <a href="https://lin.ee/cIf83XO" class="line-btn"><img src="https://scdn.line-apps.com/n/line_add_friends/btn/ja.png" alt="LINE友だち追加" height="50"></a>
         </div>
     </section>
-
     <section id="tokusho">
         <h2 class="section-title">特定商取引法に基づく表記</h2>
         <div class="tokusho-box">
@@ -173,17 +83,11 @@
                 <tr><th>所在地</th><td>〒153-0061 東京都目黒区中目黒3-5-31</td></tr>
                 <tr><th>電話番号</th><td>070-9039-6857</td></tr>
                 <tr><th>メールアドレス</th><td>kowwwgaj0724@gmail.com</td></tr>
-                <tr><th>販売価格</th><td>各案内ページに記載（表示価格は消費税込み）</td></tr>
                 <tr><th>支払方法</th><td>クレジットカード決済</td></tr>
-                <tr><th>支払時期</th><td>購入確定時に即時決済されます</td></tr>
-                <tr><th>商品の引渡時期</th><td>決済完了後、即時（メールまたは専用サイトでの提供）</td></tr>
                 <tr><th>返品・キャンセル</th><td>デジタルコンテンツの性質上、購入後の返品・返金は承っておりません。</td></tr>
             </table>
         </div>
     </section>
-
-    <footer>
-        <p>&copy; 2026 AI Business Lab. All rights reserved.</p>
-    </footer>
+    <footer><p>&copy; 2026 AI Business Lab. All rights reserved.</p></footer>
 </body>
 </html>
