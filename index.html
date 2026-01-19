@@ -1,673 +1,195 @@
 <!DOCTYPE html>
 <html lang="ja">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Business Lab - AI副業で未来を創る</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            font-family: 'Helvetica Neue', Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
             line-height: 1.8;
-            color: #1e293b;
-            background: #f8fafc;
+            color: #e2e8f0;
+            background-color: #030712;
             overflow-x: hidden;
         }
 
-        /* アニメーション背景 */
-        .animated-bg {
+        /* AIサイバー背景 */
+        .cyber-bg {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             z-index: -1;
-            background: linear-gradient(180deg, #ffffff 0%, #f1f5f9 50%, #e2e8f0 100%);
+            background: radial-gradient(circle at 50% 50%, #1e293b 0%, #030712 100%);
         }
-
-        .animated-bg::before {
+        .cyber-bg::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
             width: 100%;
             height: 100%;
-            background:
-                radial-gradient(circle at 15% 30%, rgba(59, 130, 246, 0.05) 0%, transparent 40%),
-                radial-gradient(circle at 85% 70%, rgba(99, 102, 241, 0.05) 0%, transparent 40%),
-                radial-gradient(circle at 50% 50%, rgba(147, 197, 253, 0.03) 0%, transparent 50%);
-            animation: subtlePulse 20s ease-in-out infinite;
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(59, 130, 246, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(147, 197, 253, 0.1) 0%, transparent 50%);
+            animation: pulse 10s infinite alternate;
         }
 
-        @keyframes subtlePulse {
-
-            0%,
-            100% {
-                opacity: 0.6;
-            }
-
-            50% {
-                opacity: 1;
-            }
+        @keyframes pulse {
+            0% { opacity: 0.5; }
+            100% { opacity: 1; }
         }
 
         /* ヘッダー */
         header {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
+            background: rgba(3, 7, 18, 0.8);
+            backdrop-filter: blur(15px);
             padding: 20px 0;
-            position: sticky;
+            position: fixed;
+            width: 100%;
             top: 0;
             z-index: 1000;
-            border-bottom: 1px solid rgba(226, 232, 240, 0.8);
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
+        nav { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 40px; }
+        .logo { font-size: 24px; font-weight: 800; color: #3b82f6; letter-spacing: 2px; }
+        .nav-links { display: flex; gap: 30px; list-style: none; }
+        .nav-links a { color: #94a3b8; text-decoration: none; font-size: 14px; transition: 0.3s; }
+        .nav-links a:hover { color: #3b82f6; }
 
-        nav {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 40px;
-        }
-
-        .logo {
-            font-size: 26px;
-            font-weight: 700;
-            color: #1e40af;
-            letter-spacing: 0.5px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .logo::before {
-            content: '◆';
-            color: #3b82f6;
-            font-size: 20px;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 40px;
-            list-style: none;
-        }
-
-        .nav-links a {
-            color: #475569;
-            text-decoration: none;
-            font-size: 15px;
-            font-weight: 500;
-            transition: all 0.3s;
-            position: relative;
-            padding: 8px 0;
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: #3b82f6;
-            transition: width 0.3s;
-        }
-
-        .nav-links a:hover {
-            color: #1e40af;
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        /* ヒーローセクション */
+        /* ヒーロー */
         .hero {
-            padding: 140px 40px 120px;
+            padding: 200px 40px 150px;
             text-align: center;
-            position: relative;
-            background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(248, 250, 252, 1) 100%);
         }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 20%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 800px;
-            height: 800px;
-            background: radial-gradient(circle, rgba(59, 130, 246, 0.08) 0%, transparent 65%);
-            animation: gentleGlow 8s ease-in-out infinite;
-            pointer-events: none;
-        }
-
-        @keyframes gentleGlow {
-
-            0%,
-            100% {
-                transform: translate(-50%, -50%) scale(1);
-                opacity: 0.4;
-            }
-
-            50% {
-                transform: translate(-50%, -50%) scale(1.1);
-                opacity: 0.6;
-            }
-        }
-
         .hero h1 {
-            font-size: 58px;
-            margin-bottom: 25px;
+            font-size: clamp(32px, 8vw, 64px);
             font-weight: 800;
-            color: #0f172a;
-            position: relative;
-            z-index: 1;
-            letter-spacing: -0.5px;
+            margin-bottom: 30px;
             line-height: 1.2;
+            color: #fff;
+            text-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
         }
-
         .hero h1 span {
-            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+            background: linear-gradient(to right, #60a5fa, #a855f7);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-clip: text;
         }
+        .hero p { font-size: 20px; color: #94a3b8; max-width: 800px; margin: 0 auto; }
 
-        .hero p {
-            font-size: 20px;
-            margin-bottom: 45px;
-            color: #475569;
-            position: relative;
-            z-index: 1;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-            font-weight: 400;
+        /* セクション */
+        section { padding: 100px 20px; max-width: 1100px; margin: 0 auto; }
+        .section-title { text-align: center; font-size: 36px; margin-bottom: 60px; color: #fff; }
+
+        /* カード */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 40px;
+            border-radius: 20px;
+            transition: 0.3s;
         }
+        .card:hover { background: rgba(255, 255, 255, 0.07); transform: translateY(-5px); border-color: #3b82f6; }
+        .card h3 { color: #3b82f6; margin-bottom: 15px; font-size: 22px; }
 
-        .cta-button {
-            display: inline-block;
-            background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
-            color: white;
-            padding: 18px 50px;
-            border-radius: 12px;
-            text-decoration: none;
-            font-size: 17px;
-            font-weight: 600;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.3s;
-            box-shadow: 0 4px 14px rgba(37, 99, 235, 0.25);
-            z-index: 1;
-        }
-
-        .cta-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.6s;
-        }
-
-        .cta-button:hover::before {
-            left: 100%;
-        }
-
-        .cta-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(37, 99, 235, 0.35);
-        }
-
-        /* セクション共通 */
-        section {
-            padding: 120px 40px;
-            max-width: 1400px;
-            margin: 0 auto;
-            position: relative;
-        }
-
-        .section-title {
+        /* お問い合わせ (LINE) */
+        .contact-box {
+            background: linear-gradient(135deg, rgba(30, 58, 138, 0.3), rgba(17, 24, 39, 0.3));
+            padding: 60px;
+            border-radius: 30px;
             text-align: center;
-            font-size: 42px;
-            margin-bottom: 60px;
-            font-weight: 700;
-            color: #0f172a;
-            position: relative;
-            letter-spacing: -0.5px;
+            border: 1px solid rgba(59, 130, 246, 0.3);
         }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 3px;
-            background: linear-gradient(90deg, #3b82f6, #60a5fa);
-            border-radius: 2px;
-        }
-
-        /* 特徴セクション */
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 40px;
-        }
-
-        .feature-card {
-            background: white;
-            padding: 45px 35px;
-            border-radius: 16px;
-            text-align: center;
-            border: 1px solid #e2e8f0;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-        }
-
-        .feature-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(90deg, #3b82f6, #60a5fa);
-            transform: scaleX(0);
-            transition: transform 0.4s;
-        }
-
-        .feature-card:hover::before {
-            transform: scaleX(1);
-        }
-
-        .feature-card:hover {
-            transform: translateY(-8px);
-            border-color: #bfdbfe;
-            box-shadow: 0 20px 40px rgba(59, 130, 246, 0.15);
-        }
-
-        .feature-icon {
-            font-size: 56px;
-            margin-bottom: 25px;
-        }
-
-        .feature-card h3 {
-            color: #1e40af;
-            font-size: 22px;
-            margin-bottom: 18px;
-            font-weight: 700;
-        }
-
-        .feature-card p {
-            color: #64748b;
-            line-height: 1.8;
-            font-size: 15px;
-        }
-
-        /* サービス内容 */
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-
-        .service-item {
-            background: white;
-            padding: 35px;
-            border-radius: 12px;
-            border-left: 4px solid #3b82f6;
-            transition: all 0.3s;
-            position: relative;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-        }
-
-        .service-item:hover {
-            transform: translateX(8px);
-            border-left-color: #1e40af;
-            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.12);
-        }
-
-        .service-item h3 {
-            color: #1e40af;
-            font-size: 20px;
-            margin-bottom: 12px;
-            font-weight: 700;
-        }
-
-        .service-item p {
-            color: #64748b;
-            line-height: 1.7;
-        }
-
-        /* お問い合わせセクション */
-        .contact {
-            text-align: center;
-            background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
-            border-radius: 24px;
-            padding: 100px 40px !important;
-            border: 1px solid #bfdbfe;
-        }
-
-        .contact-info {
-            background: white;
-            padding: 50px;
-            border-radius: 16px;
-            max-width: 600px;
-            margin: 0 auto;
-            box-shadow: 0 4px 20px rgba(59, 130, 246, 0.1);
-            border: 1px solid #e0e7ff;
-        }
-
-        .contact-info p {
-            font-size: 18px;
-            margin-bottom: 15px;
-            color: #334155;
-        }
-
-        .line-button {
-            display: inline-block;
-            margin-top: 25px;
-            transition: transform 0.3s;
-        }
-
-        .line-button:hover {
-            transform: scale(1.05);
-        }
+        .line-btn { display: inline-block; transition: 0.3s; margin-top: 30px; }
+        .line-btn:hover { transform: scale(1.05); filter: drop-shadow(0 0 15px #06c755); }
 
         /* 特商法 */
-        .tokusho-table {
-            max-width: 900px;
-            margin: 0 auto;
-            background: white;
-            padding: 50px;
-            border-radius: 16px;
-            border: 1px solid #e2e8f0;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        .tokusho-box {
+            background: rgba(255, 255, 255, 0.02);
+            padding: 40px;
+            border-radius: 20px;
+            font-size: 14px;
         }
-
-        .tokusho-table table {
-            width: 100%;
-            border-collapse: collapse;
+        .tokusho-table { width: 100%; border-collapse: collapse; }
+        .tokusho-table th, .tokusho-table td {
+            text-align: left;
+            padding: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
+        .tokusho-table th { width: 30%; color: #3b82f6; font-weight: 600; }
 
-        .tokusho-table tr {
-            border-bottom: 1px solid #e2e8f0;
-        }
-
-        .tokusho-table td {
-            padding: 20px;
-            color: #334155;
-        }
-
-        .tokusho-table td:first-child {
-            font-weight: 600;
-            color: #1e40af;
-            width: 200px;
-        }
-
-        /* フッター */
-        footer {
-            background: #0f172a;
-            padding: 60px 40px;
-            border-top: 1px solid #1e293b;
-        }
-
-        .footer-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 50px;
-        }
-
-        .footer-section h3 {
-            margin-bottom: 25px;
-            color: #3b82f6;
-            font-weight: 700;
-        }
-
-        .footer-section p {
-            color: #94a3b8;
-        }
-
-        .footer-section ul {
-            list-style: none;
-        }
-
-        .footer-section ul li {
-            margin-bottom: 12px;
-        }
-
-        .footer-section a {
-            color: #94a3b8;
-            text-decoration: none;
-            transition: all 0.3s;
-        }
-
-        .footer-section a:hover {
-            color: #3b82f6;
-            padding-left: 5px;
-        }
-
-        .footer-bottom {
-            text-align: center;
-            margin-top: 50px;
-            padding-top: 30px;
-            border-top: 1px solid #1e293b;
-            color: #64748b;
-        }
-
-        /* レスポンシブ */
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 40px;
-            }
-
-            .hero p {
-                font-size: 18px;
-            }
-
-            .section-title {
-                font-size: 32px;
-            }
-
-            .nav-links {
-                display: none;
-            }
-
-            nav {
-                padding: 0 20px;
-            }
-
-            section {
-                padding: 80px 20px;
-            }
-
-            .hero {
-                padding: 100px 20px;
-            }
-
-            .features-grid,
-            .services-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .tokusho-table {
-                padding: 30px 20px;
-            }
-
-            .tokusho-table td:first-child {
-                width: 120px;
-                font-size: 14px;
-            }
-        }
+        footer { text-align: center; padding: 50px; color: #4b5563; font-size: 12px; }
     </style>
 </head>
-
 <body>
-    <div class="animated-bg"></div>
+    <div class="cyber-bg"></div>
 
-    <!-- ヘッダー -->
     <header>
         <nav>
             <div class="logo">AI BUSINESS LAB</div>
             <ul class="nav-links">
                 <li><a href="#features">特徴</a></li>
-                <li><a href="#services">サービス</a></li>
-                <li><a href="#contact">お問い合わせ</a></li>
+                <li><a href="#contact">相談</a></li>
                 <li><a href="#tokusho">特商法</a></li>
             </ul>
         </nav>
     </header>
 
-    <!-- ヒーローセクション -->
     <section class="hero">
-        <h1>AI副業で<span>未来を創る</span></h1>
-        <p>次世代のスキルで、新しい収入の可能性を解き放つ</p>
-        <a href="#contact" class="cta-button">未来への第一歩を踏み出す</a>
+        <h1>AI副業で<br><span>未来を再定義する</span></h1>
+        <p>テクノロジーを武器に、個人の価値を最大化する。AI Business Labは、次世代の収益化スキルを提供します。</p>
     </section>
 
-    <!-- 特徴セクション -->
     <section id="features">
-        <h2 class="section-title">AI Business Labの特徴</h2>
-        <div class="features-grid">
-            <div class="feature-card">
-                <div class="feature-icon">🎯</div>
-                <h3>実践重視のカリキュラム</h3>
-                <p>理論だけでなく、実際に収益化できるスキルを習得。すぐに副業として活用できる最先端の内容を提供します。</p>
+        <h2 class="section-title">LABの特徴</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>01. 実践的AI活用</h3>
+                <p>ChatGPTや画像生成AIを単なるツールではなく、稼ぐための武器として使いこなす方法を学びます。</p>
             </div>
-            <div class="feature-card">
-                <div class="feature-icon">👨‍🏫</div>
-                <h3>プロフェッショナル講師</h3>
-                <p>現役で活躍するAIプロデューサーが直接指導。業界の最前線で得た知識とノウハウを惜しみなく伝授します。</p>
+            <div class="card">
+                <h3>02. 個別最適化</h3>
+                <p>あなたの現在のスキルと目標に合わせ、最適な副業ロードマップをプロが共に描きます。</p>
             </div>
-            <div class="feature-card">
-                <div class="feature-icon">💡</div>
-                <h3>初心者でも安心</h3>
-                <p>基礎から丁寧に解説。専門知識がなくても、段階的にスキルアップできるよう最適化されたプログラムです。</p>
+            <div class="card">
+                <h3>03. 継続サポート</h3>
+                <p>一度きりの教材提供ではなく、常に変化するAIトレンドに対応するためのサポートを提供します。</p>
             </div>
         </div>
     </section>
 
-    <!-- サービス内容 -->
-    <section id="services">
-        <h2 class="section-title">提供サービス</h2>
-        <div class="services-grid">
-            <div class="service-item">
-                <h3>📚 AI副業マスター講座</h3>
-                <p>ChatGPTやその他の最新AIツールを使った副業の始め方を完全マスター</p>
-            </div>
-            <div class="service-item">
-                <h3>💼 収益化戦略コンサル</h3>
-                <p>あなたのスキルと目標に合わせた最適な収益化プランをカスタマイズ</p>
-            </div>
-            <div class="service-item">
-                <h3>🚀 実践サポート</h3>
-                <p>教材購入後も継続的にサポート。実際の案件獲得まで徹底フォロー</p>
-            </div>
-            <div class="service-item">
-                <h3>🎓 最新AI情報提供</h3>
-                <p>日々進化するAI業界の最新情報とトレンドを定期的に配信</p>
-            </div>
+    <section id="contact">
+        <div class="contact-box">
+            <h2 style="font-size: 28px; margin-bottom: 20px;">LINEで無料個別相談</h2>
+            <p>現在の悩みや目標をお聞かせください。AIプロデューサーが直接回答します。</p>
+            <a href="https://lin.ee/cIf83XO" class="line-btn">
+                <img src="https://scdn.line-apps.com/n/line_add_friends/btn/ja.png" alt="LINE友だち追加" height="50">
+            </a>
         </div>
     </section>
 
-    <!-- お問い合わせセクション -->
-    <section class="contact" id="contact">
-        <h2 class="section-title">お問い合わせ</h2>
-        <div class="contact-info">
-            <p style="font-size: 24px; font-weight: 700; margin-bottom: 20px;">無料相談受付中</p>
-            <p>あなたに最適なAI副業プランをご提案します</p>
-            <div class="line-button">
-                <a href="https://lin.ee/cIf83XO">
-                    <img src="https://scdn.line-apps.com/n/line_add_friends/btn/ja.png" alt="友だち追加" height="45"
-                        border="0">
-                </a>
-            </div>
-            <p style="margin-top: 35px; font-size: 20px;">📞 070-9039-6857</p>
-            <p style="font-size: 14px; color: #94a3b8;">受付時間: 平日 10:00〜18:00</p>
-        </div>
-    </section>
-
-    <!-- 特商法 -->
     <section id="tokusho">
         <h2 class="section-title">特定商取引法に基づく表記</h2>
-        <div class="tokusho-table">
-            <table>
-                <tr>
-                    <td>販売事業者名</td>
-                    <td>AI Business Lab</td>
-                </tr>
-                <tr>
-                    <td>販売責任者</td>
-                    <td>中村 幸太</td>
-                </tr>
-                <tr>
-                    <td>所在地</td>
-                    <td>〒153-0061<br>東京都目黒区中目黒3-5-31</td>
-                </tr>
-                <tr>
-                    <td>電話番号</td>
-                    <td>070-9039-6857</td>
-                </tr>
-                <tr>
-                    <td>お支払い方法</td>
-                    <td>クレジットカード決済(Stripe)</td>
-                </tr>
-                <tr>
-                    <td>商品引き渡し</td>
-                    <td>決済完了後、即時配信</td>
-                </tr>
-                <tr>
-                    <td>返品・キャンセル</td>
-                    <td>デジタルコンテンツのため、原則として返品・返金不可</td>
-                </tr>
+        <div class="tokusho-box">
+            <table class="tokusho-table">
+                <tr><th>販売事業者名</th><td>AI Business Lab</td></tr>
+                <tr><th>運営責任者</th><td>中村 幸太</td></tr>
+                <tr><th>所在地</th><td>〒153-0061 東京都目黒区中目黒3-5-31</td></tr>
+                <tr><th>電話番号</th><td>070-9039-6857</td></tr>
+                <tr><th>メールアドレス</th><td>kowwwgaj0724@gmail.com</td></tr>
+                <tr><th>販売価格</th><td>各商品ページに記載（表示価格は消費税込み）</td></tr>
+                <tr><th>支払方法</th><td>クレジットカード決済 (Stripe)</td></tr>
+                <tr><th>支払時期</th><td>購入確定時に即時決済されます</td></tr>
+                <tr><th>商品の引渡時期</th><td>決済完了後、即時（メールまたは専用サイトでの提供）</td></tr>
+                <tr><th>返品・キャンセル</th><td>デジタルコンテンツの性質上、購入後の返品・返金は承っておりません。</td></tr>
             </table>
         </div>
     </section>
 
-    <!-- フッター -->
     <footer>
-        <div class="footer-content">
-            <div class="footer-section">
-                <h3>AI Business Lab</h3>
-                <p style="color: #94a3b8;">AIの力で新しい収入源を。<br>あなたの副業を全力でサポートします。</p>
-            </div>
-            <div class="footer-section">
-                <h3>サービス</h3>
-                <ul>
-                    <li><a href="#services">AI副業マスター講座</a></li>
-                    <li><a href="#services">収益化戦略コンサル</a></li>
-                    <li><a href="#services">実践サポート</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h3>会社情報</h3>
-                <ul>
-                    <li><a href="#tokusho">特定商取引法表記</a></li>
-                    <li><a href="#contact">お問い合わせ</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2025 AI Business Lab. All rights reserved.</p>
-        </div>
+        <p>&copy; 2026 AI Business Lab. All rights reserved.</p>
     </footer>
 </body>
-
 </html>
